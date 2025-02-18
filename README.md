@@ -83,17 +83,6 @@ The analysis of results includes:
 - Perform hyperparameter tuning for LSTM models.
 - Explore other ensemble learning techniques.
 
-## How to Run the Project
-1. Install the required dependencies:
-   ```sh
-   pip install pandas numpy scikit-learn tensorflow
-   ```
-2. Clone this repository and navigate to the project folder.
-   ```sh
-   git clone <repository-url>
-   cd text_classification_project
-   ```
-3. Run the Jupyter Notebook or Python script to train and evaluate models.
 
 ## Author
 - **[Kartik Chaturvedi]**
