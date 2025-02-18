@@ -92,6 +92,5 @@ LSTM is a type of Recurrent Neural Network (RNN) designed to process sequential 
 3. Run the Jupyter Notebook or Python script to train and evaluate models.
 
 ## Author
-- **[Your Name]**
-- **GitHub**: [Your GitHub Profile]
-- **LinkedIn**: [Your LinkedIn Profile]
+- **Kartik Chaturvedi**
+
