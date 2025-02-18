@@ -6,55 +6,59 @@ This project focuses on text classification using both statistical and deep lear
 1. **Statistical Method (Part 1A)**: Implements a machine learning-based approach using the `GradientBoostingClassifier` algorithm.
 2. **Deep Learning Method (Part 1B)**: Implements a neural network-based approach using Long Short-Term Memory (LSTM) networks.
 
-## Part 1A: Statistical Method
-### Algorithm Used: Gradient Boosting Classifier
-The **GradientBoostingClassifier** is employed for text classification, which works by training multiple decision trees in sequence, where each tree corrects the errors made by the previous ones. The final prediction is made by combining all the trained trees.
+## Part 1: Text Classification
+### Dataset
+The content has been gathered from the popular academic website **arXiv.org** for articles tagged as computer science content (though some are in mathematics or physics categories). The dataset consists of the following fields:
 
-### Objectives
-- Build **24 different model combinations** using Gradient Boosting.
-- Evaluate models using the following metrics:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1-score
-  - Precision-Recall (P-R) Curves
+- **Title**: The full title of the article.
+- **Abstract**: The full abstract of the article.
+- **InformationTheory**: Binary label (`1` if classified as an Information Theory article, otherwise `0`).
+- **ComputerVision**: Binary label (`1` if classified as a Computer Vision article, otherwise `0`).
+- **ComputationalLinguistics**: Binary label (`1` if classified as a Computational Linguistics article, otherwise `0`).
 
-### Data Preprocessing
-- **Dataset Used**: `train.csv` and `test.csv`
-- **Class Distribution Analysis**: Examines the proportion of each label in the dataset.
-- **Text Processing Steps**:
-  - Tokenization
-  - Lemmatization (using a custom `LemmaTokenizer` class)
-  - Vectorization using TF-IDF
+These three classes (**Computational Linguistics, Information Theory, and Computer Vision**) can occur in any combination, meaning an article could belong to multiple categories simultaneously.
 
-### Model Training
-- Implemented **GradientBoostingClassifier** with hyperparameter tuning.
-- Trained the model on the preprocessed text data.
-- Evaluated using different performance metrics.
+### Objective
+The goal of this project is to build text classifiers that predict each of these three classes individually using the **Abstract** field. The same experiment is then repeated using only the **Titles**. Different text classifiers are trained using multiple configurations to evaluate their performance on the three binary classification tasks.
 
-## Part 1B: Deep Learning Method
-### Algorithm Used: Long Short-Term Memory (LSTM)
-LSTM is a type of Recurrent Neural Network (RNN) designed to process sequential data efficiently. It helps in capturing long-term dependencies in textual data.
+### Configurations Considered
+This project explores various configurations for training text classification models:
 
-### Objectives
-- Train an **LSTM-based neural network** for text classification.
-- Compare its performance with the Gradient Boosting approach.
+1. **Task**: 3 binary classification tasks.
+2. **Input Features**:
+   - Use **Abstract** only.
+   - Use **Title** only.
+3. **Algorithms**:
+   - One **RNN-based classifier** (LSTM).
+   - One **statistical classifier** (e.g., logistic regression, SVM, or another readily available classifier in Python).
+4. **Text Preprocessing Variations**:
+   - Version 1: Stemming, removal of stopwords, conversion to lowercase, etc.
+   - Version 2: Different text preprocessing choices.
+5. **Training Data Size**:
+   - **First 1000 cases** in the training set.
+   - **Full training set** (excluding the last 10% as validation set).
 
-### Data Preprocessing
-- **Tokenization and Padding**:
-  - Convert text into numerical sequences.
-  - Apply padding to ensure uniform sequence length.
-- **Embedding Layer**:
-  - Transform words into dense vector representations.
+### Model Training and Testing
+Each model is trained separately under the above configurations, resulting in a **2 (Abstract vs. Title) × 3 (Binary classifiers) × 2 (Algorithms) × 2 (Preprocessing methods) × 2 (Training sizes) = 24 different configurations**.
 
-### Model Architecture
-- **Embedding Layer**: Converts words into numerical embeddings.
-- **LSTM Layer**: Processes sequential data.
-- **Dense Layer**: Outputs predictions for classification.
+For each configuration, the trained model is tested on the **test set** by ensuring:
+- Models trained on **Abstracts** are tested on **Abstracts** of the test set.
+- Models trained on **Titles** are tested on **Titles** of the test set.
 
-### Model Training and Evaluation
-- Trained using categorical cross-entropy loss.
-- Evaluated using the same metrics as Part 1A.
+### Evaluation Metrics
+The performance of the models is evaluated using the following metrics:
+- **F1-score**
+- **Precision**
+- **Recall**
+- **Accuracy**
+- **Precision-Recall curve**
+
+### Discussion and Insights
+The analysis of results includes:
+- **Comparison of the two algorithms**: When and why did each perform better?
+- **Abstract vs. Title-based models**: How did their performance differ?
+- **Effectiveness of different text preprocessing techniques**: Which one worked better and why?
+- **Insights from evaluation metrics and precision-recall curves**.
 
 ## Results and Comparison
 - A comparison is drawn between the **Gradient Boosting** and **LSTM-based models**.
@@ -92,5 +96,4 @@ LSTM is a type of Recurrent Neural Network (RNN) designed to process sequential 
 3. Run the Jupyter Notebook or Python script to train and evaluate models.
 
 ## Author
-- **Kartik Chaturvedi**
-
+- **[Kartik Chaturvedi]**
